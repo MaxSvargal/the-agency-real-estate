@@ -6,66 +6,28 @@ export function LiquidGlassSearchBar() {
   return (
     <div className="pointer-events-none absolute inset-x-0 bottom-10 flex justify-center px-4">
       <div
-        className={`pointer-events-auto max-w-4xl w-full ${styles.wrapper}`}
-        aria-label="Property search"
+        className="pointer-events-auto max-w-2xl w-full"
+        aria-label="Property search input"
       >
-        <div className={styles.effect} />
-        <div className={styles.tint} />
-        <div className={styles.shine} />
-
         <div className={styles.content}>
           <form
-            className="flex flex-col gap-2 text-xs sm:text-sm text-slate-900"
+            className="flex flex-col gap-2 text-xs sm:text-sm text-white"
             action="#"
             method="GET"
           >
-
-
-            <div className="flex w-full flex-wrap items-center gap-2 text-[0.75rem]">
-              <div
-                className="inline-flex items-center rounded-full bg-slate-900/10 px-0.5 py-0.5 backdrop-blur-sm"
-                aria-label="Listing type"
-              >
-                <button
-                  type="button"
-                  className="rounded-full bg-slate-900 px-3 py-1 text-[0.7rem] font-semibold text-slate-50 shadow-[0_4px_8px_rgba(0,0,0,0.25)] transition-colors"
-                >
-                  Buy
-                </button>
-                <button
-                  type="button"
-                  className="rounded-full px-3 py-1 text-[0.7rem] font-medium text-slate-800 hover:bg-slate-900/10 transition-colors"
-                >
-                  Rent
-                </button>
-              </div>
-
-              {/* <div className="flex flex-1 flex-wrap items-center gap-1.5 sm:ml-2">
-                {["Location", "Price", "Beds", "Baths", "More"].map((label) => (
-                  <button
-                    key={label}
-                    type="button"
-                    className="rounded-full bg-white/85 px-3 py-1 text-[0.7rem] font-medium text-slate-800 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.06)] backdrop-blur-sm transition hover:bg-white hover:shadow-[0_4px_10px_rgba(0,0,0,0.18),inset_0_0_0_1px_rgba(15,23,42,0.12)] hover:-translate-y-px"
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-
-              <button
-                type="submit"
-                className="ml-auto rounded-full bg-gradient-to-r from-red-500 to-orange-400 px-4 py-2 text-[0.75rem] font-semibold text-slate-50 shadow-[0_6px_16px_rgba(15,23,42,0.5)] transition hover:-translate-y-px hover:brightness-110 hover:shadow-[0_10px_22px_rgba(15,23,42,0.75)] active:translate-y-0 active:shadow-[0_4px_12px_rgba(15,23,42,0.65)] sm:px-5"
-              >
-                Search
-              </button> */}
-            </div>
-
             <div className="flex w-full items-center gap-2 pb-0.5">
-              <input
-                type="text"
-                placeholder="Search by address, city, or ZIP"
-                className="h-10 flex-1 rounded-full border-0 bg-white/95 px-4 text-[0.8rem] sm:text-sm font-medium text-slate-900 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)] outline-none placeholder:text-slate-500"
-              />
+              <div className={styles.inputWrapper}>
+                <div className={styles.inputEffect} />
+                <div className={styles.inputTint} />
+                <div className={styles.inputShine} />
+                <div className={`${styles.inputInner} flex items-center`}>
+                  <input
+                    type="text"
+                    placeholder="Enter a location, address, listing ID, or ask a question to agent."
+                    className="h-12 w-full rounded-full border-0 bg-transparent px-5 text-[0.85rem] sm:text-[0.95rem] font-medium text-white outline-none placeholder:text-slate-300"
+                  />
+                </div>
+              </div>
             </div>
           </form>
         </div>
@@ -98,7 +60,7 @@ export function LiquidGlassSearchBar() {
               surfaceScale="5"
               specularConstant="1"
               specularExponent="100"
-              lighting-color="white"
+              lightingColor="white"
               result="specLight"
             >
               <fePointLight x="-200" y="-200" z="300" />
