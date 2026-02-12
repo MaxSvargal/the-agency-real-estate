@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react";
+import { LiquidGlassSearchBar } from "./LiquidGlassSearchBar";
 
 export function StackedHeaderVideo() {
   const topVideoRef = useRef<HTMLVideoElement | null>(null);
@@ -135,14 +136,14 @@ export function StackedHeaderVideo() {
 
       <div className="pointer-events-none absolute inset-0 bg-black/40" />
       <div className="relative z-10 px-4 text-center text-white">
-        <h1 className="mb-2 text-3xl font-extrabold tracking-tight sm:text-4xl">
-          VIDEO ON BACKGROUND
+        <h1 className="mb-2 text-5xl sm:text-6xl lg:text-8xl font-extralight tracking-tight ">
+          Make the easy move.
         </h1>
-        <p className="mx-auto max-w-xl text-lg text-white/80">
-          High-end cross-faded header video using stacked layers and smooth
-          transitions.
+        <p className="mx-auto leading-16 text-xl sm:text-xl lg:text-2xl text-white/80">
+          Your window to the world's finest real estate
         </p>
       </div>
+      <LiquidGlassSearchBar />
     </section>
   );
 }
