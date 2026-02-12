@@ -44,26 +44,10 @@ export default function Home() {
             />
           </div>
         </section>
-        <div className="flex w-full justify-center">
-          <div className="w-full">
-            <ArchitectureGrid />
-          </div>
-        </div>
-        <div className="flex w-full justify-center">
-          <div className="w-full">
-            <AboutSection />
-          </div>
-        </div>
-        <div className="flex w-full justify-center">
-          <div className="w-full">
-            <SurfaceOptions />
-          </div>
-        </div>
-        <div className="flex w-full justify-center">
-          <div className="w-full">
-            <ContactSection />
-          </div>
-        </div>
+          <ArchitectureGrid />
+          <AboutSection />
+          <SurfaceOptions />
+          <ContactSection />
       </main>
       <Footer />
     </div>

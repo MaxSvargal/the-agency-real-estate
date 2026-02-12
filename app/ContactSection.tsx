@@ -4,7 +4,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="w-full bg-white px-4 md:px-12 lg:px-20 py-16"
+      className="w-full bg-white px-4 md:px-16 lg:px-20 py-8"
     >
       <div className="mx-auto flex w-full flex-col gap-10 md:flex-row md:items-stretch">
         {/* Left: brand & message */}

@@ -1,5 +1,6 @@
- "use client"
+"use client"
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { LiquidGlassSearchBar } from "./LiquidGlassSearchBar";
 
@@ -8,6 +9,7 @@ export function StackedHeaderVideo() {
   const bottomVideoRef = useRef<HTMLVideoElement | null>(null);
   const [isTopTransparent, setIsTopTransparent] = useState(false);
   const [isBottomTransparent, setIsBottomTransparent] = useState(true);
+  const [isVideoReady, setIsVideoReady] = useState(false);
   const pauseTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -93,8 +95,13 @@ export function StackedHeaderVideo() {
 
     topVid
       .play()
+      .then(() => {
+        // Once playback starts, we can safely hide the placeholder image
+        setIsVideoReady(true);
+      })
       .catch(() => {
         // Ignore autoplay errors; user interaction may be required
+        // The placeholder will be hidden as soon as the user presses play
       });
 
     return () => {
@@ -107,10 +114,10 @@ export function StackedHeaderVideo() {
   }, []);
 
   return (
-    <section className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-black">
+    <section className="relative flex h-screen min-h-dvh w-full items-center justify-center overflow-hidden bg-black">
       <video
         ref={bottomVideoRef}
-        className={`absolute inset-0 block h-full w-full origin-center scale-120 sm:scale-100 lg:scale-120 object-contain sm:object-cover transition-opacity duration-3000 ease-in-out ${
+        className={`absolute inset-0 block h-full w-full origin-center scale-120 sm:scale-100 lg:scale-120 object-cover translate-y-[-18vh] sm:translate-y-0 transition-transform duration-3000 ease-in-out ${
           isBottomTransparent ? "opacity-0" : "opacity-100"
         }`}
         preload="auto"
@@ -123,25 +130,40 @@ export function StackedHeaderVideo() {
 
       <video
         ref={topVideoRef}
-        className={`absolute inset-0 block h-full w-full origin-center scale-120 sm:scale-100 lg:scale-120 object-contain sm:object-cover transition-opacity duration-3000 ease-in-out ${
+        className={`absolute inset-0 block h-full w-full origin-center scale-120 sm:scale-100 lg:scale-120 object-cover translate-y-[-18vh] sm:translate-y-0 transition-transform duration-3000 ease-in-out ${
           isTopTransparent ? "opacity-0" : "opacity-100"
         }`}
         preload="auto"
         playsInline
         muted
+        onLoadedData={() => setIsVideoReady(true)}
+        onPlay={() => setIsVideoReady(true)}
       >
         <source src="/header.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
+      <Image
+        src="/mono-1.jpg"
+        alt="Loading hero background"
+        fill
+        sizes="100vw"
+        className={`absolute inset-0 block h-full w-full origin-center scale-120 sm:scale-100 lg:scale-115 object-cover translate-y-[-18vh] sm:translate-y-0 transition-transform duration-3000 ease-in-out transition-opacity ${
+          isVideoReady ? "opacity-0" : "opacity-100"
+        }`}
+        priority
+      />
+
       <div className="pointer-events-none absolute inset-0 bg-black/40" />
-      <div className="relative z-10 px-4 text-center text-white">
-        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extralight tracking-tight">
-          Make the easy move.
-        </h1>
-        <p className="mx-auto leading-16 text-xl sm:text-xl lg:text-2xl text-white/80">
-          Your window to the world's finest real estate
-        </p>
+      <div className="relative z-10 flex w-full justify-center px-6 sm:px-8 md:px-12 lg:px-20 -translate-y-10 sm:translate-y-0 transition-transform duration-500">
+        <div className="max-w-5xl text-center text-white">
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extralight tracking-tight leading-tight">
+            Make the easy move.
+          </h1>
+          <p className="mt-3 text-lg sm:mt-4 sm:text-xl lg:text-2xl text-white/80">
+            Your window to the world's finest real estate
+          </p>
+        </div>
       </div>
       <LiquidGlassSearchBar />
     </section>
