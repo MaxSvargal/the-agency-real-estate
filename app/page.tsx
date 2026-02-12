@@ -1,63 +1,151 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
+  const topVideoRef = useRef<HTMLVideoElement | null>(null);
+  const bottomVideoRef = useRef<HTMLVideoElement | null>(null);
+  const [isTopTransparent, setIsTopTransparent] = useState(false);
+  const [isBottomTransparent, setIsBottomTransparent] = useState(true);
+
+  useEffect(() => {
+    const topVid = topVideoRef.current;
+    const bottomVid = bottomVideoRef.current;
+
+    if (!topVid || !bottomVid) return;
+
+    const transitionTime = 1; // seconds before end to start cross-fade
+    const hasTopTransitionedRef = { current: false } as { current: boolean };
+    const hasBottomTransitionedRef = {
+      current: false,
+    } as { current: boolean };
+
+    const handleTopTimeUpdate = () => {
+      if (!topVid.duration) return;
+
+      if (
+        topVid.currentTime > topVid.duration - transitionTime &&
+        !hasTopTransitionedRef.current
+      ) {
+        hasTopTransitionedRef.current = true;
+
+        // Start the bottom video slightly before the top one ends
+        if (bottomVid.paused) {
+          bottomVid.currentTime = 0;
+          bottomVid
+            .play()
+            .catch(() => {
+              // Ignore autoplay errors; user interaction may be required
+            });
+        }
+
+        // Cross-fade: hide top, reveal bottom
+        setIsTopTransparent(true);
+        setIsBottomTransparent(false);
+
+        // Reset bottom transition flag for the next loop
+        hasBottomTransitionedRef.current = false;
+      }
+    };
+
+    const handleBottomTimeUpdate = () => {
+      if (!bottomVid.duration) return;
+
+      if (
+        bottomVid.currentTime > bottomVid.duration - transitionTime &&
+        !hasBottomTransitionedRef.current
+      ) {
+        hasBottomTransitionedRef.current = true;
+
+        // Start the top video slightly before the bottom one ends
+        if (topVid.paused) {
+          topVid.currentTime = 0;
+          topVid
+            .play()
+            .catch(() => {
+              // Ignore autoplay errors; user interaction may be required
+            });
+        }
+
+        // Cross-fade: hide bottom, reveal top
+        setIsBottomTransparent(true);
+        setIsTopTransparent(false);
+
+        // Reset top transition flag for the next loop
+        hasTopTransitionedRef.current = false;
+      }
+    };
+
+    const handleBottomCanPlayThrough = () => {
+      // Underlying video is buffered and ready; helps avoid "black flash"
+      // console.log("Underlying video ready!");
+    };
+
+    topVid.addEventListener("timeupdate", handleTopTimeUpdate);
+    bottomVid.addEventListener("timeupdate", handleBottomTimeUpdate);
+    bottomVid.addEventListener("canplaythrough", handleBottomCanPlayThrough);
+
+    // Ensure videos are muted so autoplay is allowed
+    topVid.muted = true;
+    bottomVid.muted = true;
+
+    // Start the sequence with the top video visible and bottom hidden
+    setIsTopTransparent(false);
+    setIsBottomTransparent(true);
+
+    topVid
+      .play()
+      .catch(() => {
+        // Ignore autoplay errors; user interaction may be required
+      });
+
+    return () => {
+      topVid.removeEventListener("timeupdate", handleTopTimeUpdate);
+      bottomVid.removeEventListener("timeupdate", handleBottomTimeUpdate);
+      bottomVid.removeEventListener(
+        "canplaythrough",
+        handleBottomCanPlayThrough,
+      );
+    };
+  }, []);
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-center bg-white py-32 px-4 dark:bg-black sm:px-16">
+        <div className="w-full max-w-[640px]">
+          <div className="relative w-full overflow-hidden bg-black aspect-video">
+            {/* Top video (forward) */}
+            <video
+              ref={topVideoRef}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out ${
+                isTopTransparent ? "opacity-0" : "opacity-100"
+              }`}
+              preload="auto"
+              playsInline
+              muted
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <source src="/header.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            {/* Bottom video (reverse or restart) */}
+            <video
+              ref={bottomVideoRef}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out ${
+                isBottomTransparent ? "opacity-0" : "opacity-100"
+              }`}
+              preload="auto"
+              playsInline
+              muted
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+              {/* 
+                If you have a separate reversed file, change this to that file.
+                For example: <source src="/header-reverse.mp4" type="video/mp4" />
+              */}
+              <source src="/header.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
       </main>
     </div>
