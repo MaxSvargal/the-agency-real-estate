@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { LiquidGlassSearchBar } from "./LiquidGlassSearchBar";
-import { HeaderMenu } from "./HeaderMenu";
 
 export function StackedHeaderVideo() {
   const topVideoRef = useRef<HTMLVideoElement | null>(null);
@@ -109,7 +108,6 @@ export function StackedHeaderVideo() {
 
   return (
     <section className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-black">
-      <HeaderMenu />
       <video
         ref={bottomVideoRef}
         className={`absolute inset-0 block h-full w-full origin-center scale-120 sm:scale-100 lg:scale-120 object-contain sm:object-cover transition-opacity duration-3000 ease-in-out ${
