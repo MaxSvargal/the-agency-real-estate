@@ -1,7 +1,8 @@
-"use client"
+ "use client"
 
 import { useEffect, useRef, useState } from "react";
 import { LiquidGlassSearchBar } from "./LiquidGlassSearchBar";
+import { HeaderMenu } from "./HeaderMenu";
 
 export function StackedHeaderVideo() {
   const topVideoRef = useRef<HTMLVideoElement | null>(null);
@@ -108,18 +109,7 @@ export function StackedHeaderVideo() {
 
   return (
     <section className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-black">
-      <div className="absolute top-6 left-1/2 z-20 flex -translate-x-1/2 items-center ml-8 opacity-50">
-        <svg
-          viewBox="0 0 120 120"
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-32 w-32"
-        >
-          <path
-            d="M50.168 41.895V64.06h1.977V41.895a4.454 4.454 0 0 0-4.45-4.449 4.428 4.428 0 0 0-3.16 1.318l-1.076 1.12-12.517 13.275H14.56l-.566-.034h-.059a5.408 5.408 0 0 0-5.403 5.4v10.057a4.454 4.454 0 0 0 4.45 4.45 4.43 4.43 0 0 0 3.162-1.322l2.454-2.578 13.197-13.997h10.884V53.16h-9.023l11.231-11.912 1.058-1.101a2.454 2.454 0 0 1 1.747-.723 2.476 2.476 0 0 1 2.473 2.474l.003-.002Z"
-            fill="#fff"
-          />
-        </svg>
-      </div>
+      <HeaderMenu />
       <video
         ref={bottomVideoRef}
         className={`absolute inset-0 block h-full w-full origin-center scale-120 sm:scale-100 lg:scale-120 object-contain sm:object-cover transition-opacity duration-3000 ease-in-out ${
@@ -148,7 +138,7 @@ export function StackedHeaderVideo() {
 
       <div className="pointer-events-none absolute inset-0 bg-black/40" />
       <div className="relative z-10 px-4 text-center text-white">
-        <h1 className="mb-2 text-5xl sm:text-6xl lg:text-8xl font-extralight tracking-tight ">
+        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extralight tracking-tight">
           Make the easy move.
         </h1>
         <p className="mx-auto leading-16 text-xl sm:text-xl lg:text-2xl text-white/80">

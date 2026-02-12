@@ -1,0 +1,25 @@
+.shimmerText {
+  position: relative;
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0.2)
+  );
+  background-size: 130% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 4s ease-in-out infinite alternate;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -130% 0;
+  }
+  100% {
+    background-position: 130% 0;
+  }
+}
+
+
