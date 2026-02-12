@@ -117,7 +117,7 @@ export function StackedHeaderVideo() {
     <section className="relative flex h-screen min-h-dvh w-full items-center justify-center overflow-hidden bg-black">
       <video
         ref={bottomVideoRef}
-        className={`absolute inset-0 block h-full w-full origin-center scale-120 sm:scale-100 lg:scale-120 object-cover translate-y-[-18vh] sm:translate-y-0 transition-transform duration-3000 ease-in-out ${
+        className={`absolute inset-0 block h-full w-full origin-center scale-120 sm:scale-100 lg:scale-120 object-cover translate-y-[-18vh] sm:translate-y-0 transition duration-3000 ease-in-out ${
           isBottomTransparent ? "opacity-0" : "opacity-100"
         }`}
         preload="auto"
@@ -130,7 +130,7 @@ export function StackedHeaderVideo() {
 
       <video
         ref={topVideoRef}
-        className={`absolute inset-0 block h-full w-full origin-center scale-120 sm:scale-100 lg:scale-120 object-cover translate-y-[-18vh] sm:translate-y-0 transition-transform duration-3000 ease-in-out ${
+        className={`absolute inset-0 block h-full w-full origin-center scale-120 sm:scale-100 lg:scale-120 object-cover translate-y-[-18vh] sm:translate-y-0 transition duration-3000 ease-in-out ${
           isTopTransparent ? "opacity-0" : "opacity-100"
         }`}
         preload="auto"
@@ -148,7 +148,7 @@ export function StackedHeaderVideo() {
         alt="Loading hero background"
         fill
         sizes="100vw"
-        className={`absolute inset-0 block h-full w-full origin-center scale-120 sm:scale-100 lg:scale-115 object-cover translate-y-[-18vh] sm:translate-y-0 transition-transform duration-3000 ease-in-out transition-opacity ${
+        className={`absolute inset-0 block h-full w-full origin-center scale-120 sm:scale-100 lg:scale-115 object-cover translate-y-[-18vh] sm:translate-y-0 transition duration-3000 ease-in-out ${
           isVideoReady ? "opacity-0" : "opacity-100"
         }`}
         priority

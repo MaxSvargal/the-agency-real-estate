@@ -4,7 +4,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="w-full bg-white px-4 md:px-16 lg:px-20 py-8"
+      className="w-full bg-white px-4 md:px-16 lg:px-20 py-16"
     >
       <div className="mx-auto flex w-full flex-col gap-10 md:flex-row md:items-stretch">
         {/* Left: brand & message */}
@@ -197,7 +197,7 @@ export function ContactSection() {
 
               <button
                 type="submit"
-                className="inline-flex items-center justify-center rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-medium tracking-[0.18em] uppercase text-white transition hover:bg-zinc-800"
+                className="cursor-pointer inline-flex items-center justify-center rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-medium tracking-[0.18em] uppercase text-white transition hover:bg-zinc-800"
               >
                 Let&apos;s connect
               </button>

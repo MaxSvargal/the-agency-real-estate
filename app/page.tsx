@@ -8,6 +8,7 @@ import { StatsBar } from "./StatsBar";
 import { ArchitectureGrid } from "./ArchitectureGrid";
 import { AboutSection } from "./AboutSection";
 import { SurfaceOptions } from "./SurfaceOptions";
+import { ReviewsSection } from "./ReviewsSection";
 import { ContactSection } from "./ContactSection";
 import { Footer } from "./Footer";
 import { HeaderMenu } from "./HeaderMenu";
@@ -47,6 +48,7 @@ export default function Home() {
           <ArchitectureGrid />
           <AboutSection />
           <SurfaceOptions />
+          <ReviewsSection />
           <ContactSection />
       </main>
       <Footer />

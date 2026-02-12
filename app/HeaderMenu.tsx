@@ -32,6 +32,11 @@ export function HeaderMenu({ scrolled = false }: HeaderMenuProps) {
   const toggleOpen = () => setIsOpen((prev) => !prev);
   const closeMenu = () => setIsOpen(false);
 
+  const scrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    closeMenu();
+  };
+
   return (
     <>
       <header
@@ -82,6 +87,8 @@ export function HeaderMenu({ scrolled = false }: HeaderMenuProps) {
               Agents
             </a>
             <button
+              type="button"
+              onClick={scrollToContact}
               className={`cursor-pointer rounded-full border px-6 py-2 text-xs font-semibold uppercase tracking-[0.18em] shadow-sm backdrop-blur-md transition ${buttonBgClass}`}
             >
               Book a tour
@@ -161,7 +168,8 @@ export function HeaderMenu({ scrolled = false }: HeaderMenuProps) {
                   Agents
                 </a>
                 <button
-                  onClick={closeMenu}
+                  type="button"
+                  onClick={scrollToContact}
                   className={`mt-2 cursor-pointer rounded-full border px-6 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] shadow-sm backdrop-blur-md transition ${
                     scrolled
                       ? "border-black/40 bg-black text-white hover:bg-black/80"
