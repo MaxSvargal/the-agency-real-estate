@@ -2,7 +2,10 @@ import Image from "next/image";
 
 export function ContactSection() {
   return (
-    <section className="w-full bg-white px-4 md:px-12 lg:px-20 py-16">
+    <section
+      id="contact"
+      className="w-full bg-white px-4 md:px-12 lg:px-20 py-16"
+    >
       <div className="mx-auto flex w-full flex-col gap-10 md:flex-row md:items-stretch">
         {/* Left: brand & message */}
         <aside className="relative md:w-5/12 lg:w-1/2 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-900/80 p-8 text-white">
@@ -14,7 +17,7 @@ export function ContactSection() {
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="pointer-events-none select-none object-cover opacity-70"
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/70 via-black/30 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-linear-to-tr from-black/70 via-black/30 to-transparent" />
 
           <div className="relative z-10 flex h-full flex-col justify-between">
             <div>

@@ -1,60 +1,108 @@
-"use client";
+ "use client";
 
-import styles from "./LiquidGlassSearchBar.module.css";
+import { FormEvent, useRef, useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import { LiquidGlassContainer } from "./LiquidGlassContainer";
+import { AgentTooltip } from "./AgentTooltip";
 
 export function LiquidGlassSearchBar() {
+  const [query, setQuery] = useState("");
+  const [showTooltip, setShowTooltip] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!query.trim()) {
+      setShowTooltip(false);
+      return;
+    }
+
+    setShowTooltip(true);
+  };
+
+  const handleContactClick = () => {
+    const target =
+      document.getElementById("contact") ||
+      document.getElementById("contact-section");
+
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const handleOverlayClick = () => {
+    inputRef.current?.blur();
+    setShowTooltip(false);
+  };
+
   return (
-    <div className="pb-12 pointer-events-none absolute inset-x-0 bottom-10 flex justify-center px-4">
-      <div className="pointer-events-auto max-w-2xl w-full" aria-label="Property search input">
+    <div className="pointer-events-none absolute inset-x-0 bottom-10 flex justify-center px-4 pb-12">
+      <div
+        className="pointer-events-auto w-full max-w-2xl"
+        aria-label="Property search input"
+      >
+        {showTooltip && (
+          <div
+            className="fixed inset-0 z-0 cursor-pointer"
+            onClick={handleOverlayClick}
+          />
+        )}
+
         <div className="relative z-10 w-full">
           <form
-            className="flex flex-col gap-2 text-xs sm:text-sm text-white"
+            className="flex flex-col gap-3 text-xs text-white sm:text-sm"
             action="#"
             method="GET"
+            onSubmit={handleSubmit}
           >
+            <AnimatePresence>
+              {showTooltip && (
+                <AgentTooltip
+                  key="agent-tooltip"
+                  query={query}
+                  onContactClick={handleContactClick}
+                />
+              )}
+            </AnimatePresence>
+
             <div className="flex w-full items-center gap-2 pb-0.5">
-              <div
-                className="relative w-full overflow-hidden rounded-full shadow-[0_6px_6px_rgba(0,0,0,0.2),0_0_20px_rgba(0,0,0,0.1)]"
-              >
-                <div className={styles.inputEffect} />
-                <div className={styles.inputTint} />
-                <div className={styles.inputShine} />
-                <div className="relative z-10 flex items-center rounded-full px-4">
-                  <input
-                    type="text"
-                    placeholder="Enter a location, address, listing ID, or ask a question to agent."
-                    className="h-12 w-full rounded-full border-0 bg-transparent pr-10 pl-1 text-[0.85rem] sm:text-[0.95rem] font-medium text-white outline-none placeholder:text-slate-300"
-                  />
-                  <button
-                    type="submit"
-                    className="absolute right-3 inline-flex h-6 w-6 items-center justify-center rounded-full border-0 bg-transparent p-0 text-slate-200 hover:text-white focus:outline-none cursor-pointer"
-                    aria-label="Search"
+              <LiquidGlassContainer innerClassName="flex items-center rounded-full px-4">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  placeholder="Enter a location, address, listing ID, or ask a question to AI."
+                  className="h-12 w-full rounded-full border-0 bg-transparent pl-1 pr-10 text-[0.85rem] font-medium text-white outline-none placeholder:text-slate-300 sm:text-[0.95rem]"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                />
+                <button
+                  type="submit"
+                  className="absolute right-3 inline-flex h-6 w-6 cursor-pointer items-center justify-center rounded-full border-0 bg-transparent p-0 text-slate-200 hover:text-white focus:outline-none"
+                  aria-label="Search"
+                >
+                  <svg
+                    aria-hidden="true"
+                    className="h-5 w-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <svg
-                      aria-hidden="true"
-                      className="h-5 w-5"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <circle
-                        cx="11"
-                        cy="11"
-                        r="8"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      />
-                      <path
-                        d="M21 21L16.65 16.65"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
+                    <circle
+                      cx="11"
+                      cy="11"
+                      r="8"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    />
+                    <path
+                      d="M21 21L16.65 16.65"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </LiquidGlassContainer>
             </div>
           </form>
         </div>

@@ -1,11 +1,24 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Image from "next/image";
+
+const cardMotionProps = {
+  initial: { y: 32, opacity: 0 },
+  whileInView: { y: -4, opacity: 1 },
+  viewport: { amount: 0.4, once: false },
+  transition: { duration: 0.6, ease: "easeOut" },
+} as const;
 
 export function ArchitectureGrid() {
   return (
     <section className="w-full bg-white px-4 md:px-12 lg:px-20 p-16">
       <div className="w-full max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 w-full auto-rows-[180px] md:auto-rows-[220px]">
-          <div className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-2 row-span-2 bg-zinc-100">
+          <motion.div
+            {...cardMotionProps}
+            className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-2 row-span-2 bg-zinc-100"
+          >
             <div className="relative h-full w-full">
               <Image
                 alt="Architecture sketch 1"
@@ -16,9 +29,12 @@ export function ArchitectureGrid() {
                 className="object-cover transition-all duration-700 ease-out"
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-1 row-span-1 bg-zinc-100">
+          <motion.div
+            {...cardMotionProps}
+            className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-1 row-span-1 bg-zinc-100"
+          >
             <div className="relative h-full w-full">
               <Image
                 alt="Architecture sketch 2"
@@ -28,9 +44,12 @@ export function ArchitectureGrid() {
                 className="object-cover transition-all duration-700 ease-out"
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-1 row-span-1 bg-zinc-100">
+          <motion.div
+            {...cardMotionProps}
+            className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-1 row-span-1 bg-zinc-100"
+          >
             <div className="relative h-full w-full">
               <Image
                 alt="Architecture sketch 3"
@@ -40,9 +59,12 @@ export function ArchitectureGrid() {
                 className="object-cover transition-all duration-700 ease-out"
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-1 row-span-2 bg-zinc-100">
+          <motion.div
+            {...cardMotionProps}
+            className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-1 row-span-2 bg-zinc-100"
+          >
             <div className="relative h-full w-full">
               <Image
                 alt="Architecture sketch 4"
@@ -52,9 +74,12 @@ export function ArchitectureGrid() {
                 className="object-cover transition-all duration-700 ease-out"
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-1 row-span-1 bg-zinc-100">
+          <motion.div
+            {...cardMotionProps}
+            className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-1 row-span-1 bg-zinc-100"
+          >
             <div className="relative h-full w-full">
               <Image
                 alt="Architecture sketch 5"
@@ -64,9 +89,12 @@ export function ArchitectureGrid() {
                 className="object-cover transition-all duration-700 ease-out"
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-2 row-span-1 bg-zinc-100">
+          <motion.div
+            {...cardMotionProps}
+            className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-2 row-span-1 bg-zinc-100"
+          >
             <div className="relative h-full w-full">
               <Image
                 alt="Architecture sketch 6"
@@ -76,9 +104,12 @@ export function ArchitectureGrid() {
                 className="object-cover transition-all duration-700 ease-out"
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-1 row-span-1 bg-zinc-100">
+          <motion.div
+            {...cardMotionProps}
+            className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-1 row-span-1 bg-zinc-100"
+          >
             <div className="relative h-full w-full">
               <Image
                 alt="Architecture sketch 7"
@@ -88,9 +119,12 @@ export function ArchitectureGrid() {
                 className="object-cover transition-all duration-700 ease-out"
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-1 row-span-2 bg-zinc-100">
+          <motion.div
+            {...cardMotionProps}
+            className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-1 row-span-2 bg-zinc-100"
+          >
             <div className="relative h-full w-full">
               <Image
                 alt="Architecture sketch 8"
@@ -100,9 +134,12 @@ export function ArchitectureGrid() {
                 className="object-cover transition-all duration-700 ease-out"
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-2 row-span-1 bg-zinc-100">
+          <motion.div
+            {...cardMotionProps}
+            className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-2 row-span-1 bg-zinc-100"
+          >
             <div className="relative h-full w-full">
               <Image
                 alt="Architecture sketch 9"
@@ -112,9 +149,12 @@ export function ArchitectureGrid() {
                 className="object-cover transition-all duration-700 ease-out"
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-1 row-span-1 bg-zinc-100">
+          <motion.div
+            {...cardMotionProps}
+            className="relative overflow-hidden rounded-lg border border-zinc-300 col-span-1 row-span-1 bg-zinc-100"
+          >
             <div className="relative h-full w-full">
               <Image
                 alt="Architecture sketch 10"
@@ -124,7 +164,7 @@ export function ArchitectureGrid() {
                 className="object-cover transition-all duration-700 ease-out"
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

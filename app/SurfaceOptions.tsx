@@ -1,8 +1,20 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Image from "next/image";
+
+const surfaceCardMotionProps = {
+  // Keep cards always visible, just nudge them up/down with scroll
+  initial: { y: 24 },
+  whileInView: { y: -6 },
+  viewport: { amount: 0.25, once: false },
+  transition: { duration: 0.55, ease: "easeOut" },
+} as const;
 
 export function SurfaceOptions() {
   return (
-    <section id="accessories" className="bg-white">
+    <section id="accessories" className="bg-white w-full">
+      <div className="m-auto">
       <div className="px-6 py-20 md:px-12 lg:px-20 md:py-10">
         <h2 className="text-3xl font-medium tracking-tight text-zinc-900 md:text-4xl">
           Surface Options
@@ -12,7 +24,10 @@ export function SurfaceOptions() {
       <div className="pb-24">
         {/* Mobile horizontal scroll */}
         <div className="flex gap-6 overflow-x-auto px-6 pb-4 md:hidden snap-x snap-mandatory scrollbar-hide">
-          <div className="group flex-shrink-0 w-[75vw] snap-center">
+          <motion.div
+            {...surfaceCardMotionProps}
+            className="group flex-shrink-0 w-[75vw] snap-center"
+          >
             <div className="relative aspect-[2/3] overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100">
               <div className="relative h-full w-full">
                 <Image
@@ -39,9 +54,12 @@ export function SurfaceOptions() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="group flex-shrink-0 w-[75vw] snap-center">
+          <motion.div
+            {...surfaceCardMotionProps}
+            className="group flex-shrink-0 w-[75vw] snap-center"
+          >
             <div className="relative aspect-[2/3] overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100">
               <div className="relative h-full w-full">
                 <Image
@@ -68,9 +86,12 @@ export function SurfaceOptions() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="group flex-shrink-0 w-[75vw] snap-center">
+          <motion.div
+            {...surfaceCardMotionProps}
+            className="group flex-shrink-0 w-[75vw] snap-center"
+          >
             <div className="relative aspect-[2/3] overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100">
               <div className="relative h-full w-full">
                 <Image
@@ -97,12 +118,12 @@ export function SurfaceOptions() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Desktop grid */}
         <div className="hidden md:grid md:grid-cols-3 gap-8 md:px-12 lg:px-20">
-          <div className="group">
+          <motion.div {...surfaceCardMotionProps} className="group">
             <div className="relative aspect-[2/3] overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100">
               <div className="relative h-full w-full">
                 <Image
@@ -129,9 +150,9 @@ export function SurfaceOptions() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="group">
+          <motion.div {...surfaceCardMotionProps} className="group">
             <div className="relative aspect-[2/3] overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100">
               <div className="relative h-full w-full">
                 <Image
@@ -158,9 +179,9 @@ export function SurfaceOptions() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="group">
+          <motion.div {...surfaceCardMotionProps} className="group">
             <div className="relative aspect-[2/3] overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100">
               <div className="relative h-full w-full">
                 <Image
@@ -187,8 +208,9 @@ export function SurfaceOptions() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
+      </div>
       </div>
     </section>
   );
