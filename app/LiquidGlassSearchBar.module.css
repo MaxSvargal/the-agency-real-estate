@@ -1,18 +1,3 @@
-.content {
-  position: relative;
-  z-index: 3;
-}
-
-.inputWrapper {
-  position: relative;
-  width: 100%;
-  border-radius: 9999px;
-  overflow: hidden;
-  box-shadow:
-    0 6px 6px rgba(0, 0, 0, 0.2),
-    0 0 20px rgba(0, 0, 0, 0.1);
-}
-
 .inputEffect {
   position: absolute;
   inset: 0;
@@ -37,12 +22,6 @@
   box-shadow:
     inset 2px 2px 1px 0 rgba(255, 255, 255, 0.25),
     inset -1px -1px 1px 1px rgba(255, 255, 255, 0.2);
-  border-radius: inherit;
-}
-
-.inputInner {
-  position: relative;
-  z-index: 3;
   border-radius: inherit;
 }
 
